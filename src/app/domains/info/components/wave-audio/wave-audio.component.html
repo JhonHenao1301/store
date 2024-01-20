@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-2">
+  <div #wave></div>
+  <button (click)="playPause()" class="outline px-2 py-1">
+    @if (isPlaying()) {
+    <span>Pause</span>
+    } @else {
+    <span>Play</span>}
+  </button>
+</div>

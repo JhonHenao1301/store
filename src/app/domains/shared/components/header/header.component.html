@@ -1,0 +1,152 @@
+<nav class="bg-slate-800 px-4 text-slate-50">
+  <div
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 px-2"
+  >
+    <div class="flex items-center space-x-8 order-1">
+      <a href="https://flowbite.com/" class="flex items-center">
+        <img src="assets/slack-logo.jpg" class="h-10" alt="Slack Logo" />
+      </a>
+    </div>
+    <div
+      class="flex flex-col items-center w-full order-4 lg:order-2 lg:flex lg:items-center lg:w-auto lg:space-x-8"
+      id="mobile-menu-2"
+      [class.hidden]="hideResponsiveMenu()"
+    >
+      <ul class="flex flex-col items-center gap-4 mt-4 lg:m-0 lg:flex-row">
+        @for (headerItem of headerArray; track $index) {
+        <li>
+          @if($index === 0) {
+          <a
+            [routerLink]="headerItem.route"
+            [routerLinkActive]="headerItem.activeClass"
+            [classList]="headerItem.class"
+            [routerLinkActiveOptions]="{ exact: true }"
+            aria-current="page"
+          >
+            {{ headerItem.name }}
+          </a>
+          } @else {
+          <a
+            [routerLink]="headerItem.route"
+            [routerLinkActive]="headerItem.activeClass"
+            [classList]="headerItem.class"
+          >
+            {{ headerItem.name }}
+          </a>
+          }
+        </li>
+        }
+      </ul>
+    </div>
+    <!-- cart button -->
+    <div class="flex items-center order-2 lg:order-3">
+      <button
+        class="border relative p-2 rounded order-3"
+        (click)="showSideMenu()"
+      >
+        <div
+          class="bg-slate-600 absolute -top-2 -left-2 rounded-xl h-5 w-5 text-white text-xs"
+        >
+          {{ cart().length }}
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- burger menu button -->
+    <div class="flex items-center order-3 lg:hidden">
+      <button
+        data-collapse-toggle="mobile-menu-2"
+        type="button"
+        class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="mobile-menu-2"
+        aria-expanded="false"
+        (click)="showResponsiveMenu()"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <svg
+          class="hidden w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<!-- Cart menu -->
+<div
+  class="fixed border-l-4 top-0 right-0 bg-red z-40 w-72 h-screen p-4 overflow-y-auto transition-transform bg-white"
+  [class.translate-x-full]="hideSideMenu()"
+>
+  <div class="flex justify-between items-center">
+    <p class="text-xl font-bold">My Cart</p>
+    <button (click)="showSideMenu()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Cart menu list -->
+  <div class="flex flex-col gap-4 mt-6">
+    @for (product of cart(); track product) {
+    <div class="flex justify-between gap-4">
+      <img
+        [src]="product.images[0]"
+        alt="product.title"
+        width="60"
+        class="rounded-md"
+      />
+      <div class="flex flex-col items-center justify-center">
+        <h3 class="text-md font-semibold">{{ product.title }}</h3>
+        <p>{{ product.price }}</p>
+      </div>
+    </div>
+    }
+    <div class="flex justify-between px-2">
+      <h3 class="font-semibold text-lg text-slate-500">Total</h3>
+      <p class="font-semibold text-2xl">$ {{ total() }}</p>
+    </div>
+  </div>
+</div>

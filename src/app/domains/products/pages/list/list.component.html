@@ -1,0 +1,21 @@
+<main class="flex flex-col justify-center sm:flex-row p-8 gap-4">
+  <div class="w-60">
+    <ul class="flex flex-col gap-4">
+      <li>
+        <a routerLink="/">All</a>
+      </li>
+      @for (item of categories(); track item) {
+      <li>
+        <a routerLink="/" [queryParams]="{ category_id: item.id }">
+          {{ item.name }}
+        </a>
+      </li>
+      }
+    </ul>
+  </div>
+  <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+    @for (product of products(); track product) {
+    <app-product [product]="product" (addToCart)="addToCart($event)" />
+    }
+  </div>
+</main>
