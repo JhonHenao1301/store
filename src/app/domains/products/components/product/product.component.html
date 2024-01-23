@@ -4,19 +4,15 @@
     routerLinkActive="router-link-active"
     class="w-full overflow-hidden rounded-t-lg bg-gray-200"
   >
-    @if(product.images[0].indexOf(this.symbolSearched) === -1){
     <img
-      [src]="product.images[0]"
+      [src]="
+        product.images[0].indexOf(symbolSearched) === -1
+          ? product.images[0]
+          : '/assets/no-image.jpg'
+      "
       [alt]="product.title"
       class="h-full w-full object-cover object-center group-hover:opacity-75"
     />
-    } @else {
-    <img
-      src="assets/no-image.jpg"
-      [alt]="product.title"
-      class="h-full w-full object-cover object-center group-hover:opacity-75"
-    />
-    }
   </a>
   <div class="flex flex-col gap-2 p-4 h-full">
     <p class="flex justify-between gap-8">

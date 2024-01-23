@@ -26,7 +26,6 @@ export default class ProductDetailComponent {
       .subscribe({
         next: (product) => {
           this.productChosen.set(product)
-          console.log(product)
           if(product.images.length > 0) {
             this.cover.set(product.images[0])
           }
@@ -45,4 +44,6 @@ export default class ProductDetailComponent {
       this.cartService.addToCart(product)
     }
   }
+
+  symbolSearched:string = "]"
 }

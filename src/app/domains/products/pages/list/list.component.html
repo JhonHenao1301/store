@@ -12,27 +12,6 @@
       </li>
       }
     </ul>
-    <!-- <label
-      for="categories"
-      class="block mb-2 text-sm font-medium text-gray-900"
-    >
-      Categories
-    </label>
-    <select
-      id="categories"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 pr-4"
-    >
-      <option routerLink="/" value="All">All</option>
-      @for (item of categories(); track item) {
-      <option
-        [value]="item.name"
-        routerLink="/"
-        [queryParams]="{ category_id: item.id }"
-      >
-        {{ item.name }}
-      </option>
-      }
-    </select> -->
   </div>
   <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
     @for (product of products(); track product) {

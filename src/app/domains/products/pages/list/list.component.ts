@@ -37,7 +37,6 @@ export default class ListComponent {
     .subscribe({
       next: (products) => {
         this.products.set(products)
-        console.log(products)
       },
       error: () => {}
     })

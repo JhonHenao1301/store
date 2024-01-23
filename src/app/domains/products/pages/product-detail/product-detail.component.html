@@ -4,7 +4,11 @@
       <img
         alt="e-commerce"
         class="w-full object-cover object-center rounded-sm"
-        [src]="cover()"
+        [src]="
+          cover().indexOf(symbolSearched) === -1
+            ? cover()
+            : '/assets/no-image.jpg'
+        "
       />
     </div>
     <div class="flex items-center justify-center mt-1">
@@ -14,7 +18,9 @@
           alt="e-commerce"
           class="w-full object-cover object-center rounded border-2 border-gray-200"
           [class.border-red-300.rounded]="img === cover()"
-          [src]="img"
+          [src]="
+            img.indexOf(symbolSearched) === -1 ? img : '/assets/no-image.jpg'
+          "
           (click)="changeCover(img)"
         />
         }
