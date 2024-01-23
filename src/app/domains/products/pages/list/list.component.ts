@@ -1,5 +1,4 @@
 import { Component, inject, signal, Input,SimpleChanges } from '@angular/core';
-
 import { Product } from '@shared/models/product.model'
 import { Category } from '@shared/models/category.model';
 import { ProductComponent } from '@products/components/product/product.component'
@@ -27,7 +26,7 @@ export default class ListComponent {
 
   ngOnInit() {
     this.getCategories()
-  }
+}
 
   ngOnChanges(changes: SimpleChanges) {
     this.getProducts()
@@ -38,6 +37,7 @@ export default class ListComponent {
     .subscribe({
       next: (products) => {
         this.products.set(products)
+        console.log(products)
       },
       error: () => {}
     })

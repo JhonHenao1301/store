@@ -18,4 +18,5 @@ export class ProductComponent {
   addToCartHandler() {
     this.addToCart.emit(this.product)
   }
+  symbolSearched:string = "]"
 }
