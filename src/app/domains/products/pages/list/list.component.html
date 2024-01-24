@@ -1,21 +1,50 @@
-<main class="flex flex-col justify-center sm:flex-row p-8 gap-6">
-  <div class="w-60">
-    <ul class="flex flex-col gap-4">
-      <li>
-        <a routerLink="/">All</a>
-      </li>
-      @for (item of categories(); track item) {
-      <li>
-        <a routerLink="/" [queryParams]="{ category_id: item.id }">
-          {{ item.name }}
-        </a>
-      </li>
-      }
-    </ul>
+<main class="flex flex-col justify-center sm:flex-row p-8 gap-8">
+  <div class="w-60 flex flex-col gap-8">
+    <div class="flex flex-col gap-4">
+      <label class="font-bold">Categories</label>
+      <ul class="flex flex-col gap-4">
+        <li>
+          <a routerLink="/">All</a>
+        </li>
+        @for (item of categories(); track item) {
+        <li>
+          <a routerLink="/" [queryParams]="{ category_id: item.id }">
+            {{ item.name }}
+          </a>
+        </li>
+        }
+      </ul>
+    </div>
+    <div class="flex flex-col gap-4">
+      <label class="font-bold">Price range</label>
+      <div class="relative mb-6">
+        <label for="labels-range-input" class="sr-only">Labels range</label>
+        <input
+          id="labels-range-input"
+          type="range"
+          value="0"
+          min="0"
+          max="100"
+          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-500"
+          [(ngModel)]="priceFilterValue"
+        />
+        <span class="text-sm text-gray-500">{{ priceFilterValue }}</span>
+        <span
+          class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
+          >Min ($5)</span
+        >
+        <span
+          class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
+          >Max ($100)</span
+        >
+      </div>
+    </div>
   </div>
   <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-    @for (product of products(); track product) {
-    <app-product [product]="product" (addToCart)="addToCart($event)" />
-    }
+    <app-product
+      *ngFor="let product of products() | priceFilter : priceFilterValue"
+      [product]="product"
+      (addToCart)="addToCart($event)"
+    />
   </div>
 </main>

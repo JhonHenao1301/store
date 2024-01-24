@@ -7,11 +7,14 @@ import { ProductService } from '@shared/services/product.service';
 import { CategoryService } from '@shared/services/category.service';
 import { CartService } from '@shared/services/cart.service';
 import { RouterLinkWithHref } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { PriceFilterPipe } from '@shared/pipes/price-filter.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ProductComponent, HeaderComponent, RouterLinkWithHref],
+  imports: [CommonModule, ProductComponent, HeaderComponent, RouterLinkWithHref, FormsModule, PriceFilterPipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
@@ -23,6 +26,7 @@ export default class ListComponent {
   private productService = inject(ProductService)
   private categoryService = inject(CategoryService)
   @Input() category_id? : string
+  priceFilterValue : number = 0
 
   ngOnInit() {
     this.getCategories()
