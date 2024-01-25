@@ -9,12 +9,13 @@ import { CartService } from '@shared/services/cart.service';
 import { RouterLinkWithHref } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PriceFilterPipe } from '@shared/pipes/price-filter.pipe';
+import { CapitalizeFirstLetterPipe } from '@shared/pipes/capitalize-first-letter.pipe';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, ProductComponent, HeaderComponent, RouterLinkWithHref, FormsModule, PriceFilterPipe],
+  imports: [CommonModule, ProductComponent, HeaderComponent, RouterLinkWithHref, FormsModule, PriceFilterPipe, CapitalizeFirstLetterPipe],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })

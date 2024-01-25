@@ -9,7 +9,7 @@
         @for (item of categories(); track item) {
         <li>
           <a routerLink="/" [queryParams]="{ category_id: item.id }">
-            {{ item.name }}
+            {{ item.name | capitalizeFirstLetter }}
           </a>
         </li>
         }
