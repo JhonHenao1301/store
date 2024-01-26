@@ -60,4 +60,8 @@ export default class ListComponent {
   addToCart(product: Product) {
     this.cartService.addToCart(product)
   }
+
+  updatePriceRange(value: number) {
+    return value.toString()
+  }
 }

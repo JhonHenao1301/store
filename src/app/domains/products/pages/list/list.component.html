@@ -17,34 +17,49 @@
     </div>
     <div class="flex flex-col gap-4">
       <label class="font-bold">Price range</label>
-      <div class="relative mb-6">
+      <div class="my-6">
         <label for="labels-range-input" class="sr-only">Labels range</label>
-        <input
-          id="labels-range-input"
-          type="range"
-          value="0"
-          min="0"
-          max="100"
-          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-500"
-          [(ngModel)]="priceFilterValue"
-        />
-        <span class="text-sm text-gray-500">{{ priceFilterValue }}</span>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
-          >Min ($5)</span
-        >
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
-          >Max ($100)</span
-        >
+        <div class="relative mt-">
+          <input
+            id="labels-range-input"
+            type="range"
+            value="0"
+            min="0"
+            max="100"
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-500 relative"
+            [(ngModel)]="priceFilterValue"
+          />
+          <span
+            class="inputValue"
+            [style.left.%]="updatePriceRange(priceFilterValue)"
+          >
+            {{ priceFilterValue }}
+          </span>
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
+            >$0
+          </span>
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
+            >$100
+          </span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+  @if (products().length > 0) {
+  <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
     <app-product
       *ngFor="let product of products() | priceFilter : priceFilterValue"
       [product]="product"
       (addToCart)="addToCart($event)"
     />
   </div>
+  } @else {
+  <div class="flex items-center justify-center w-full">
+    <p class="font-medium text-xl">
+      There are not items to show with these characteristics
+    </p>
+  </div>
+  }
 </main>

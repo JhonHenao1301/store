@@ -1,0 +1,28 @@
+.inputValue {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    color: aliceblue;
+    top: -2rem;
+    left: 1rem;
+    text-align: center;
+    font-size: .8rem;
+    transform: translateX(-50%);
+    line-height: 2rem;
+    z-index: 2;
+}
+
+.inputValue::after {
+    position: absolute;
+    content: '';
+    background-color: rgb(2, 21, 104);
+    height: 2rem;
+    width: 2rem;
+    left: 22%;
+    transform: translateX(-20%) rotate(45deg);
+    z-index: -1;
+    border: 3px solid #fbffff;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
