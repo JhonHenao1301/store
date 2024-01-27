@@ -14,9 +14,10 @@ import { RouterLink } from '@angular/router';
 export class ProductComponent {
   @Input({ required: true }) product!: Product;
   @Output() addToCart = new EventEmitter()
+  symbolSearched:string = "]"
+  textSearched: string =  "Automation"
 
   addToCartHandler() {
     this.addToCart.emit(this.product)
   }
-  symbolSearched:string = "]"
 }

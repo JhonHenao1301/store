@@ -6,7 +6,8 @@
   >
     <img
       [src]="
-        product.images[0].indexOf(symbolSearched) === -1
+        product.images[0].indexOf(symbolSearched) === -1 ||
+        product.images[0].indexOf(textSearched) !== -1
           ? product.images[0]
           : '/assets/no-image.jpg'
       "
@@ -16,9 +17,11 @@
   </a>
   <div class="flex flex-col gap-2 p-4 h-full">
     <p class="flex justify-between gap-8">
-      <span class="text-md text-gray-700 font-semibold">
+      @if(product.images[0].indexOf(textSearched) !== -1){
+      <span class="text-md text-wrap text-gray-700 font-semibold">
         {{ product.title }}
       </span>
+      } @else { Information not available }
       <span class="text-md font-semibold text-red-800">
         {{ product.price | currency : "$" : "symbol" : "1.0" }}
       </span>

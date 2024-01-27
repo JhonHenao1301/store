@@ -48,7 +48,9 @@
     </div>
   </div>
   @if (products().length > 0) {
-  <div class="grid justify-center sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+  <div
+    class="grid justify-center sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full"
+  >
     <app-product
       *ngFor="let product of products() | priceFilter : priceFilterValue"
       [product]="product"
